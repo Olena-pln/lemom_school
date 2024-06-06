@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class MeanNumber {
+public class ArithmeticMean {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
 
@@ -12,7 +12,8 @@ public class MeanNumber {
         System.out.print("Enter third number: ");
         int c = reader.nextInt();
 
-        System.out.print("Arithmetic mean: ");
-        System.out.print((a + b + c)/3);
+        int mean;
+        mean = (a + b + c)/3;
+        System.out.println("Arithmetic mean: " + mean);
         }
     }
