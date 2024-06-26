@@ -6,38 +6,30 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
-import java.util.concurrent.TimeUnit;
 
 public class DarkThemeTest {
 
     @Test
     public void switcherStatusTest() {
 
-        ChromeOptions options = new ChromeOptions();
+        System.setProperty("webdriver.chrome.driver", "src/chromedriver.exe");
         WebDriver driver = new ChromeDriver(options);
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\baggi\\IdeaProjects\\lemon\\src\\chromedriver.exe");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         driver.get("https://www.google.com/");
-
         // Accept cookies
-        driver.findElement(By.xpath("//button[@id='L2AGLb']")).click();
-
+        if (!driver.findElements(By.xpath("//button[@id='L2AGLb']")).isEmpty()) {
+            driver.findElement(By.xpath("//button[@id='L2AGLb']")).click();
+        }
         // Settings
         driver.findElement(By.xpath("//div[@jsname='LgbsSe']")).click();
-
         // Search settings
         driver.findElements(By.xpath("//div[@jsname='ibnC6b']")).getFirst().click();
-
         // Other settings
         driver.findElement(By.xpath("//span[@class='OPuSkc z1asCe DET5Lc']")).click();
-
         // Dark theme switcher
-        WebElement el = driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div/span[3]"));
+        WebElement darkThemeSwitcher = driver.findElement(By.xpath("//div[@jscontroller='SozS2' and @class='lnnMGf' and @data-froc='1']//span[@jsname='jOfkMb']"));
 
         String expectedValueForDarkThemeSwitcher = "Откл.";
-        Assert.assertEquals(el.getText(), expectedValueForDarkThemeSwitcher);
+        Assert.assertEquals(darkThemeSwitcher.getText(), expectedValueForDarkThemeSwitcher);
         driver.quit();
     }
 }
